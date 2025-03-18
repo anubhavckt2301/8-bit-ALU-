@@ -1,0 +1,79 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 18.03.2025 23:24:01
+// Design Name: 
+// Module Name: alu_8_bit_tb
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
+
+
+module alu_8_bit_tb;
+   
+    reg [7:0] A;
+    reg [7:0] B;
+    reg [2:0] ALU_Sel;
+    wire [7:0] ALU_Out;
+    wire Zero;
+    
+    // Instantiate ALU
+    ALU_8_bit uut (
+        .A(A),
+        .B(B),
+        .ALU_Sel(ALU_Sel),
+        .ALU_Out(ALU_Out),
+        .Zero(Zero)
+    );
+    
+    // Test process
+    initial begin
+        // Test case 1: Addition
+        A = 8'b00001111; B = 8'b00000001; ALU_Sel = 3'b000; #10;
+        $display("A=%b, B=%b, ALU_Sel=%b, ALU_Out=%b, Zero=%b", A, B, ALU_Sel, ALU_Out, Zero);
+        
+        // Test case 2: Subtraction
+        A = 8'b00001111; B = 8'b00001111; ALU_Sel = 3'b001; #10;
+        $display("A=%b, B=%b, ALU_Sel=%b, ALU_Out=%b, Zero=%b", A, B, ALU_Sel, ALU_Out, Zero);
+        
+        // Test case 3: AND
+        A = 8'b11001100; B = 8'b10101010; ALU_Sel = 3'b010; #10;
+        $display("A=%b, B=%b, ALU_Sel=%b, ALU_Out=%b, Zero=%b", A, B, ALU_Sel, ALU_Out, Zero);
+        
+        // Test case 4: OR
+        A = 8'b11001100; B = 8'b10101010; ALU_Sel = 3'b011; #10;
+        $display("A=%b, B=%b, ALU_Sel=%b, ALU_Out=%b, Zero=%b", A, B, ALU_Sel, ALU_Out, Zero);
+        
+        // Test case 5: XOR
+        A = 8'b11001100; B = 8'b10101010; ALU_Sel = 3'b100; #10;
+        $display("A=%b, B=%b, ALU_Sel=%b, ALU_Out=%b, Zero=%b", A, B, ALU_Sel, ALU_Out, Zero);
+        
+        // Test case 6: NOT
+        A = 8'b11001100; B = 8'b00000000; ALU_Sel = 3'b101; #10;
+        $display("A=%b, B=%b, ALU_Sel=%b, ALU_Out=%b, Zero=%b", A, B, ALU_Sel, ALU_Out, Zero);
+        
+        // Test case 7: Left Shift
+        A = 8'b00001111; B = 8'b00000000; ALU_Sel = 3'b110; #10;
+        $display("A=%b, B=%b, ALU_Sel=%b, ALU_Out=%b, Zero=%b", A, B, ALU_Sel, ALU_Out, Zero);
+        
+        // Test case 8: Right Shift
+        A = 8'b00001111; B = 8'b00000000; ALU_Sel = 3'b111; #10;
+        $display("A=%b, B=%b, ALU_Sel=%b, ALU_Out=%b, Zero=%b", A, B, ALU_Sel, ALU_Out, Zero);
+        
+        $finish;
+    end
+    
+endmodule
+
+
